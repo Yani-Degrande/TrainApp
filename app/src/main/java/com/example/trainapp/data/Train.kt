@@ -8,6 +8,8 @@ data class Train(var type: String, var image: Int) {
             Train("Type 13", R.drawable._3),
             Train("Type 18", R.drawable._8),
             Train("Type 77", R.drawable.hlr77_1),
+            Train("Type 11", R.drawable._1),
+            Train("Type 27", R.drawable._7),
         )
         val getAll: () -> List<Train> = {
             val list = mutableListOf<Train>()

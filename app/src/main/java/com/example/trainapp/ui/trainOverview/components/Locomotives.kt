@@ -29,7 +29,7 @@ fun Locomotives() {
     Box {
         Column(Modifier.padding(8.dp)) {
             Text(
-                text = "Locomotives",
+                text = "Locomotieven",
                 fontWeight = FontWeight.Bold,
                 color = Color.Black,
                 modifier = Modifier

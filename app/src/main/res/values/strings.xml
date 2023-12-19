@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">TrainApp</string>
+    <string name="train_app_title">Train App</string>
+    <string name="trains">Treinen</string>
+    <string name="groups">Ploegen</string>
+    <string name="teams">Ploegen</string>
 </resources>
