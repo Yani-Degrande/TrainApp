@@ -22,6 +22,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -52,15 +54,13 @@ class MainActivity : ComponentActivity() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TrainApp(){
+fun TrainApp(navController: NavHostController = rememberNavController()){
     var selectedItem by remember { mutableStateOf(0) }
     val trainIcon = painterResource(R.drawable.train_fill0_wght400_grad0_opsz24)
     val groupIcon = painterResource(R.drawable.group_fill0_wght400_grad0_opsz24)
 
     val icons = listOf(trainIcon, groupIcon)
     val items = listOf("Treinen", "Ploegen")
-
-    val navController = rememberNavController()
 
     Scaffold(
         containerColor = Color.Transparent,
@@ -86,8 +86,8 @@ fun TrainApp(){
             )
         }
     ) { innerPadding ->
-        NavHost(navController = navController, startDestination = "Trains") {
-            composable(route= Destinations.Trains.name) {
+        NavHost(navController = navController, startDestination = Destinations.Start.name) {
+            composable(route= Destinations.Start.name) {
                 TrainOverview(innerPadding = innerPadding)
             }
 
