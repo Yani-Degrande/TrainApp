@@ -20,8 +20,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -30,7 +30,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun Train(type: String, image: Painter) {
+fun TrainCard(type: String, image: Int) {
     Box(
         modifier = Modifier
             .height(IntrinsicSize.Min) // Adjust the height to fit the content
@@ -47,7 +47,7 @@ fun Train(type: String, image: Painter) {
             verticalArrangement = Arrangement.spacedBy(8.dp) // Space the children vertically
         ) {
             Image(
-                painter = image,
+                painter = painterResource(id = image),
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
