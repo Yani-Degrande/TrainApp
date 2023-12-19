@@ -1,2 +1,5 @@
-package com.example.trainapp.ui.navigation 
+package com.example.trainapp.ui.navigation
 
+enum class Destinations {
+    Trains, Teams
+}
