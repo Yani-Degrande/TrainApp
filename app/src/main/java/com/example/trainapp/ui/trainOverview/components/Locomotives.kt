@@ -9,6 +9,7 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
@@ -21,10 +22,9 @@ import com.example.trainapp.R
 
 
 
-@SuppressLint("UnrememberedMutableState")
 @Composable
 fun Locomotives() {
-    val locomotives = mutableStateOf(com.example.trainapp.data.Train.getAll())
+    val locomotives = remember { mutableStateOf(com.example.trainapp.data.Train.getAll()) }
 
     Box {
         Column(Modifier.padding(8.dp)) {

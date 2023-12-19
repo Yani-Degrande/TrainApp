@@ -9,6 +9,10 @@ data class Train(var type: String, var image: Int) {
             Train("Type 18", R.drawable._8),
             Train("Type 77", R.drawable.hlr77_1),
         )
-        val getAll: () -> List<Train> = { sampleTrains }
+        val getAll: () -> List<Train> = {
+            val list = mutableListOf<Train>()
+            list.addAll(sampleTrains)
+            list
+        }
     }
 }
