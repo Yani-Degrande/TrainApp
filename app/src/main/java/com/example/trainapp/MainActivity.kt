@@ -62,14 +62,16 @@ fun TrainApp(){
 
     val navController = rememberNavController()
 
-    var topAppBarTitle by remember { mutableStateOf("Train App") }
-
     Scaffold(
         containerColor = Color.Transparent,
         topBar = {
             TopAppBar(
-                topAppBarTitle = topAppBarTitle,
-                modifier = Modifier.padding(8.dp)
+                modifier = Modifier.padding(8.dp),
+                when (selectedItem) {
+                    0 -> R.string.trains
+                    1 -> R.string.groups
+                    else -> R.string.train_app_title
+                }
             )
         },
         bottomBar = {
@@ -86,7 +88,6 @@ fun TrainApp(){
     ) { innerPadding ->
         NavHost(navController = navController, startDestination = "Trains") {
             composable(route= Destinations.Trains.name) {
-                topAppBarTitle = "Treinen"
                 TrainOverview(innerPadding = innerPadding)
             }
 
@@ -96,7 +97,6 @@ fun TrainApp(){
                         text = "Selected item: ${items[selectedItem]}",
                         modifier = Modifier.padding(innerPadding)
                     )
-                    topAppBarTitle = "Ploegen"
                 }
 
             }
