@@ -1,6 +1,5 @@
 package com.example.trainapp.ui.trainOverview
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
@@ -13,8 +12,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.trainapp.TrainViewModel
-import com.example.trainapp.data.TrainComponent
 import com.example.trainapp.data.TrainComponentType
 import com.example.trainapp.ui.trainOverview.components.TrainComponentList
 
