@@ -35,11 +35,17 @@ class TrainAppNavigationTest {
     }
 
     @Test
-
     fun trainAppNavHost_clickTeams_navigatesToTeamsScreen() {
         // Perform a click on the Teams NavigationBarItem
         composeTestRule.onNodeWithContentDescriptionId(R.string.groups)
             .performClick()
         navController.assertCurrentRouteName(Destinations.Teams.name)
+    }
+    @Test
+    fun trainAppNavHost_clickTrains_navigatesToTeamsScreen() {
+        // Perform a click on the Teams NavigationBarItem
+        composeTestRule.onNodeWithContentDescriptionId(R.string.trains)
+            .performClick()
+        navController.assertCurrentRouteName(Destinations.Train.name)
     }
 }
