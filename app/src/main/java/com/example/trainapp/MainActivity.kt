@@ -3,10 +3,14 @@ package com.example.trainapp
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -21,7 +25,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
@@ -59,9 +67,10 @@ fun TrainApp(navController: NavHostController = rememberNavController()){
     var selectedItem by remember { mutableStateOf(0) }
     val trainIcon = painterResource(R.drawable.train_fill0_wght400_grad0_opsz24)
     val groupIcon = painterResource(R.drawable.group_fill0_wght400_grad0_opsz24)
+    val homeIcon = painterResource(R.drawable.cottage_fill0_wght400_grad0_opsz24)
 
-    val icons = listOf(trainIcon, groupIcon)
-    val items = listOf("Treinen", "Ploegen")
+    val icons = listOf(homeIcon,trainIcon, groupIcon)
+    val items = listOf("Home", "Treinen", "Ploegen")
 
     Scaffold(
         containerColor = Color.Transparent,
@@ -69,8 +78,9 @@ fun TrainApp(navController: NavHostController = rememberNavController()){
             TopAppBar(
                 modifier = Modifier.padding(8.dp),
                 when (selectedItem) {
-                    0 -> R.string.trains
-                    1 -> R.string.groups
+                    0 -> R.string.train_app_title
+                    1 -> R.string.trains
+                    2 -> R.string.groups
                     else -> R.string.train_app_title
                 }
             )
@@ -89,6 +99,40 @@ fun TrainApp(navController: NavHostController = rememberNavController()){
     ) { innerPadding ->
         NavHost(navController = navController, startDestination = Destinations.Start.name) {
             composable(route= Destinations.Start.name) {
+                Box(modifier = Modifier.padding(innerPadding), contentAlignment = Alignment.TopCenter) {
+                    Column (modifier = Modifier.verticalScroll(rememberScrollState())){
+                        Image(
+                            painter = painterResource(id = R.drawable.logo),
+                            contentDescription = "Logo",
+                        )
+                        Box(contentAlignment = Alignment.Center) {
+                            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                                Text(
+                                    text = "Welkom aan boord!",
+                                    style = TextStyle(
+                                        fontSize = 24.sp,
+                                        fontWeight = FontWeight.Bold,
+                                        color = Color.Black
+                                    ),
+                                    modifier = Modifier.padding(8.dp)
+                                )
+                                Text(
+                                    text = "Ontdek de fascinerende wereld van treinen met de Treinliefhebber App. Uw reis door de rijke geschiedenis en indrukwekkende techniek van de spoorwegen begint hier!",
+                                    style = TextStyle(
+                                        fontSize = 16.sp,
+                                        fontWeight = FontWeight.Normal,
+                                        color = Color.Gray
+                                    ),
+                                    textAlign = TextAlign.Center,
+                                    modifier = Modifier.padding(8.dp)
+                                )
+                            }
+                        }
+                    }
+                }
+
+            }
+            composable(route = Destinations.Train.name) {
                 TrainOverview(innerPadding = innerPadding)
             }
 
