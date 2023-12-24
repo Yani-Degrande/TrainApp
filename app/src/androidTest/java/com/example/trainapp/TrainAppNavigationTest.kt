@@ -1,14 +1,11 @@
 package com.example.trainapp
 import androidx.activity.ComponentActivity
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
-import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.performClick
 import androidx.navigation.compose.ComposeNavigator
 import androidx.navigation.testing.TestNavHostController
 import com.example.trainapp.ui.navigation.Destinations
-import junit.framework.TestCase.assertEquals
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
