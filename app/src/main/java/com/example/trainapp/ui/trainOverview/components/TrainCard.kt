@@ -28,9 +28,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
+import com.example.trainapp.R
 
 @Composable
-fun TrainCard(type: String, image: Int) {
+fun TrainCard(type: String, image: String) {
     Box(
         modifier = Modifier
             .height(IntrinsicSize.Min) // Adjust the height to fit the content
@@ -46,9 +48,11 @@ fun TrainCard(type: String, image: Int) {
             horizontalAlignment = Alignment.CenterHorizontally, // Center horizontally
             verticalArrangement = Arrangement.spacedBy(8.dp) // Space the children vertically
         ) {
-            Image(
-                painter = painterResource(id = image),
-                contentDescription = null,
+            AsyncImage(
+                model = image,
+                contentDescription = type,
+                error = painterResource(R.drawable.ic_broken_image),
+                placeholder = painterResource(R.drawable.loading_img),
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .size(150.dp)
