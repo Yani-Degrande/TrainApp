@@ -11,15 +11,3 @@ interface TrainComponentApiService {
     suspend fun getTrainComponents(): List<ApiTrainComponent>
 }
 
-private var retrofit: Retrofit = Retrofit.Builder()
-    .addConverterFactory(
-        Json.asConverterFactory("application/json".toMediaType())
-    )
-    .baseUrl("http://10.0.2.2:3000")
-    .build()
-
-object TrainComponentApi {
-    val trainComponentService: TrainComponentApiService by lazy {
-        retrofit.create(TrainComponentApiService::class.java)
-    }
-}

@@ -20,8 +20,7 @@ import com.example.trainapp.data.TrainComponentType
 import com.example.trainapp.ui.trainOverview.components.TrainComponentList
 
 @Composable
-fun TrainOverview(innerPadding: PaddingValues) {
-    val viewModel : TrainViewModel = viewModel()
+fun TrainOverview(innerPadding: PaddingValues, viewModel : TrainViewModel = viewModel(factory = TrainViewModel.Factory)) {
     val trainUiState by viewModel.trainUiState.collectAsState()
 
     Box(modifier = Modifier.padding(innerPadding)) {
