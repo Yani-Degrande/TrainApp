@@ -31,7 +31,7 @@ fun TrainOverview(innerPadding: PaddingValues, viewModel : TrainViewModel = view
             when (trainApiState) {
                 is TrainApiState.Error -> {
                     item {
-                        Text("Error!")
+                        Text("Error!", modifier = Modifier.align(Alignment.Center))
                     }
                 }
                 is TrainApiState.Loading -> {
