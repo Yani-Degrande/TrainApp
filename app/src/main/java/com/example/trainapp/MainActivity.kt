@@ -32,6 +32,7 @@ import com.example.trainapp.ui.navigation.TopAppBar
 import com.example.trainapp.ui.startOverview.StartOverview
 import com.example.trainapp.ui.theme.TrainAppTheme
 import com.example.trainapp.ui.trainOverview.TrainOverview
+import com.example.trainapp.ui.trainOverview.detail.TrainDetailsOverview
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -92,7 +93,13 @@ fun TrainApp(navController: NavHostController = rememberNavController()){
 
             }
             composable(route = Destinations.Train.name) {
-                TrainOverview(innerPadding = innerPadding)
+                TrainOverview(innerPadding = innerPadding, onTrainComponentClick = { trainId ->
+                    navController.navigate("${Destinations.Train.name}/$trainId")
+                })
+            }
+            composable(route = "${Destinations.Train.name}/{trainId}") { backStackEntry ->
+                val trainId = backStackEntry.arguments?.getString("trainId")?.toInt() ?: 0
+                TrainDetailsOverview(innerPadding, trainId)
             }
 
             composable(route = Destinations.Teams.name) {

@@ -20,7 +20,7 @@ import com.example.trainapp.data.TrainComponentType
 import com.example.trainapp.ui.trainOverview.components.TrainComponentList
 
 @Composable
-fun TrainOverview(innerPadding: PaddingValues, viewModel : TrainViewModel = viewModel(factory = TrainViewModel.Factory)) {
+fun TrainOverview(innerPadding: PaddingValues, viewModel : TrainViewModel = viewModel(factory = TrainViewModel.Factory), onTrainComponentClick: (Int) -> Unit) {
     val trainUiState by viewModel.trainUiState.collectAsState()
 
     Box(modifier = Modifier.padding(innerPadding)) {
@@ -48,11 +48,11 @@ fun TrainOverview(innerPadding: PaddingValues, viewModel : TrainViewModel = view
                     val trainsets = trainApiState.trains.filter { it.type == TrainComponentType.TRAINSET }
 
                     item {
-                        TrainComponentList(locomotives, "Locomotieven")
+                        TrainComponentList(locomotives, "Locomotieven", onTrainComponentClick)
                         Spacer(modifier = Modifier.height(16.dp))
-                        TrainComponentList(carriages, "Rijtuigen")
+                        TrainComponentList(carriages, "Rijtuigen", onTrainComponentClick)
                         Spacer(modifier = Modifier.height(16.dp))
-                        TrainComponentList(trainsets, "Treinstellen")
+                        TrainComponentList(trainsets, "Treinstellen", onTrainComponentClick)
                     }
                 }
             }

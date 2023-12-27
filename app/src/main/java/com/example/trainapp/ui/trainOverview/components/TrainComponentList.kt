@@ -18,7 +18,7 @@ import com.example.trainapp.data.TrainComponent
 
 
 @Composable
-fun TrainComponentList(trainComponents : List<TrainComponent>, trainComponentType: String) {
+fun TrainComponentList(trainComponents : List<TrainComponent>, trainComponentType: String, onTrainComponentClick: (Int) -> Unit) {
 
     Box {
         Column() {
@@ -39,8 +39,10 @@ fun TrainComponentList(trainComponents : List<TrainComponent>, trainComponentTyp
             ) {
                 items(trainComponents.size) {
                     TrainCard(
+                        trainId = trainComponents[it].id,
                         type = trainComponents[it].subtype,
-                        image = trainComponents[it].image
+                        image = trainComponents[it].image,
+                        onClick = onTrainComponentClick
                     )
                 }
             }
