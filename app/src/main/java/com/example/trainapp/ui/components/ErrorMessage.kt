@@ -69,7 +69,7 @@ fun ErrorMessage(
                 contentColor = Color.Black
             ),
         ) {
-            Text(text = "Retry")
+            Text(text = "Probeer opnieuw")
         }
     }
 }
