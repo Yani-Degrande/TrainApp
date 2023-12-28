@@ -46,6 +46,12 @@ class TrainViewModel(
             }
         }
     }
+
+    fun retry() {
+        trainApiState = TrainApiState.Loading
+        getApiTrainComponents()
+    }
+
     companion object {
         val Factory : ViewModelProvider.Factory = viewModelFactory {
             initializer {

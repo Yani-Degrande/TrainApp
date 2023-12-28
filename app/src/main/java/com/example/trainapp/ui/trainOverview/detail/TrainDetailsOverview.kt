@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import com.example.trainapp.R
+import com.example.trainapp.ui.components.ErrorMessage
 
 @Composable
 fun TrainDetailsOverview(
@@ -34,13 +35,15 @@ fun TrainDetailsOverview(
 ) {
     Box(
         modifier = Modifier
-            .fillMaxSize()
-            .padding(innerPadding), contentAlignment = Alignment.Center
+            .padding(innerPadding)
+            .fillMaxSize(), // Ensures the Box fills the entire available space
+        contentAlignment = Alignment.Center
     ) {
         val trainApiState = viewModel.trainDetailApiState
         when (trainApiState) {
             is TrainDetailApiState.Error -> {
-                Text("Error!")
+                ErrorMessage(errorMessage = "Oops, er is iets misgegaan! Probeer het opnieuw."
+                    , onRetry = { viewModel.retry() })
             }
             is TrainDetailApiState.Loading -> {
                 Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()) {

@@ -17,13 +17,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.trainapp.data.TrainComponentType
+import com.example.trainapp.ui.components.ErrorMessage
 import com.example.trainapp.ui.trainOverview.components.TrainComponentList
 
 @Composable
 fun TrainOverview(innerPadding: PaddingValues, viewModel : TrainViewModel = viewModel(factory = TrainViewModel.Factory), onTrainComponentClick: (Int) -> Unit) {
     val trainUiState by viewModel.trainUiState.collectAsState()
 
-    Box(modifier = Modifier.padding(innerPadding)) {
+    Box(modifier = Modifier.padding(innerPadding).fillMaxSize(), contentAlignment = Alignment.Center) {
         LazyColumn(
             contentPadding = PaddingValues(8.dp),
         ) {
@@ -31,7 +32,8 @@ fun TrainOverview(innerPadding: PaddingValues, viewModel : TrainViewModel = view
             when (trainApiState) {
                 is TrainApiState.Error -> {
                     item {
-                        Text("Error!", modifier = Modifier.align(Alignment.Center))
+                        ErrorMessage(errorMessage = "Oops, er is iets misgegaan! Probeer het opnieuw."
+                            , onRetry = { viewModel.retry() })
                     }
                 }
                 is TrainApiState.Loading -> {

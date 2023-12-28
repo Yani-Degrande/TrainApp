@@ -48,6 +48,12 @@ class TrainDetailViewModel (
             }
         }
     }
+
+    fun retry() {
+        trainDetailApiState = TrainDetailApiState.Loading
+        getApiTrainDetailComponents()
+    }
+
     companion object {
         fun Factory(trainId: Int): ViewModelProvider.Factory = viewModelFactory {
             initializer {
