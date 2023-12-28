@@ -6,6 +6,7 @@ import java.util.concurrent.CompletionService
 
 interface TrainRepository {
     suspend fun getTrainComponents(): List<TrainComponent>
+    suspend fun getTrainComponent(id: Int): TrainComponent
 }
 
 class ApiTrainRepository(
@@ -13,4 +14,19 @@ class ApiTrainRepository(
 ) : TrainRepository {
     override suspend fun getTrainComponents() =
         trainApiService.getTrainComponents().asDomainObjects()
+
+    override suspend fun getTrainComponent(id: Int): TrainComponent {
+        trainApiService.getTrainComponentById(id).let {
+            return it.let {
+                TrainComponent(
+                    id = it.id,
+                    type = it.type,
+                    subtype = it.subtype,
+                    image = it.image,
+                    descriptionImage = it.descriptionImage,
+                    description = it.description
+                )
+            }
+        }
+    }
 }

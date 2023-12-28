@@ -34,7 +34,6 @@ class TrainViewModel(
     private fun getApiTrainComponents() {
         viewModelScope.launch {
             try {
-                //val result = trainComponentService.getTrainComponents()
                 val result = trainRepository.getTrainComponents()
                 _trainUiState.update {
                     it.copy(trains = result)

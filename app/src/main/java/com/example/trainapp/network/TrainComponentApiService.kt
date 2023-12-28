@@ -5,12 +5,13 @@ import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import retrofit2.Retrofit
 import retrofit2.http.GET
+import retrofit2.http.Path
 
 interface TrainComponentApiService {
     @GET("/api/trainComponents")
     suspend fun getTrainComponents(): List<ApiTrainComponent>
 
     @GET("/api/trainComponents/{id}")
-    suspend fun getTrainComponentById(id: Int): ApiTrainComponent
+    suspend fun getTrainComponentById(@Path("id") id: Int): ApiTrainComponent
 }
 

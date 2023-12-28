@@ -110,5 +110,8 @@ data class TrainComponent(
             list.addAll(sampleTrainComponents.filter { it.type == type })
             list
         }
+        val getById: (Int) -> TrainComponent? = { id ->
+            sampleTrainComponents.find { it.id == id }
+        }
     }
 }

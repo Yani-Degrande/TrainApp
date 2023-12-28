@@ -20,71 +20,69 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
-import com.example.trainapp.ui.trainOverview.TrainApiState
-import com.example.trainapp.ui.trainOverview.TrainViewModel
+import com.example.trainapp.R
 
 @Composable
 fun TrainDetailsOverview(
     innerPadding: PaddingValues,
-    trainId: Int, viewModel : TrainViewModel = viewModel(factory = TrainViewModel.Factory)
+    trainId: Int, viewModel : TrainDetailViewModel = viewModel(factory = TrainDetailViewModel.Factory(trainId))
 ) {
     Box(
         modifier = Modifier
             .fillMaxSize()
             .padding(innerPadding), contentAlignment = Alignment.Center
     ) {
-        val trainApiState = viewModel.trainApiState
+        val trainApiState = viewModel.trainDetailApiState
         when (trainApiState) {
-            is TrainApiState.Error -> {
+            is TrainDetailApiState.Error -> {
                 Text("Error!")
             }
-            is TrainApiState.Loading -> {
+            is TrainDetailApiState.Loading -> {
                 Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()) {
                     CircularProgressIndicator()
                 }
             }
-            is TrainApiState.Success -> {
-                val train = trainApiState.trains.find { it.id == trainId }
-                if (train != null) {
-                    Column(
+            is TrainDetailApiState.Success -> {
+                val train = trainApiState.train
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .verticalScroll(rememberScrollState()) // Make the column scrollable
+                        .padding(16.dp) // Add padding around the Column
+                ) {
+                    AsyncImage(
+                        model = train.descriptionImage,
+                        contentDescription = train.subtype,
+                        error = painterResource(R.drawable.ic_broken_image),
+                        placeholder = painterResource(R.drawable.loading_img),
                         modifier = Modifier
-                            .fillMaxSize()
-                            .verticalScroll(rememberScrollState()) // Make the column scrollable
-                            .padding(16.dp) // Add padding around the Column
-                    ) {
-                        AsyncImage(
-                            model = train.descriptionImage,
-                            contentDescription = train.subtype,
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .aspectRatio(16f / 9f)
-                                .clip(RoundedCornerShape(16.dp))
-                        )
-                        Spacer(modifier = Modifier.height(16.dp))
-                        Text(
-                            text = train.subtype,
-                            style = MaterialTheme.typography.headlineLarge.copy(
-                                fontWeight = FontWeight.Bold,
-                                color = Color.Black
-                            ),
-                            modifier = Modifier.padding(horizontal = 16.dp)
-                        )
-                        Spacer(modifier = Modifier.height(8.dp))
-                        Text(
-                            text = train.description,
-                            style = MaterialTheme.typography.bodyMedium.copy(
-                                fontWeight = FontWeight.Normal,
-                                color = Color.Black.copy(alpha = 0.75f)
-                            ),
-                            modifier = Modifier.padding(horizontal = 16.dp)
-                        )
-                    }
-                } else {
-                    Text("Train not found!", modifier = Modifier.padding(16.dp))
+                            .fillMaxWidth()
+                            .aspectRatio(16f / 9f)
+                            .clip(RoundedCornerShape(16.dp))
+                    )
+                    Spacer(modifier = Modifier.height(16.dp))
+                    Text(
+                        text = train.subtype,
+                        style = MaterialTheme.typography.headlineLarge.copy(
+                            fontWeight = FontWeight.Bold,
+                            color = Color.Black
+                        ),
+                        modifier = Modifier.padding(horizontal = 16.dp)
+                    )
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Text(
+                        text = train.description,
+                        style = MaterialTheme.typography.bodyMedium.copy(
+                            fontWeight = FontWeight.Normal,
+                            color = Color.Black.copy(alpha = 0.75f)
+                        ),
+                        modifier = Modifier.padding(horizontal = 16.dp)
+                    )
                 }
 
             }
