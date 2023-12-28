@@ -5,21 +5,13 @@ import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import retrofit2.Retrofit
 import retrofit2.http.GET
+import retrofit2.http.Path
 
 interface TrainComponentApiService {
     @GET("/api/trainComponents")
     suspend fun getTrainComponents(): List<ApiTrainComponent>
+
+    @GET("/api/trainComponents/{id}")
+    suspend fun getTrainComponentById(@Path("id") id: Int): ApiTrainComponent
 }
 
-private var retrofit: Retrofit = Retrofit.Builder()
-    .addConverterFactory(
-        Json.asConverterFactory("application/json".toMediaType())
-    )
-    .baseUrl("http://10.0.2.2:3000")
-    .build()
-
-object TrainComponentApi {
-    val trainComponentService: TrainComponentApiService by lazy {
-        retrofit.create(TrainComponentApiService::class.java)
-    }
-}

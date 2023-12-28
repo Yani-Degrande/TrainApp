@@ -2,6 +2,7 @@ package com.example.trainapp.ui.trainOverview.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -32,9 +33,10 @@ import coil.compose.AsyncImage
 import com.example.trainapp.R
 
 @Composable
-fun TrainCard(type: String, image: String) {
+fun TrainCard(trainId: Int,type: String, image: String,onClick: (Int) -> Unit) {
     Box(
         modifier = Modifier
+            .clickable { onClick(trainId) }
             .height(IntrinsicSize.Min) // Adjust the height to fit the content
             .width(180.dp)
             .padding(8.dp)

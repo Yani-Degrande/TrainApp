@@ -9,7 +9,9 @@ data class ApiTrainComponent(
     val id: Int,
     val type: TrainComponentType,
     val subtype: String,
-    val image: String
+    val image: String,
+    val descriptionImage: String,
+    val description: String
 )
 
 fun List<ApiTrainComponent>.asDomainObjects()= map {
@@ -17,6 +19,8 @@ fun List<ApiTrainComponent>.asDomainObjects()= map {
         id = it.id,
         type = it.type,
         subtype = it.subtype,
-        image = it.image
+        image = it.image,
+        descriptionImage = it.descriptionImage,
+        description = it.description
     )
 }

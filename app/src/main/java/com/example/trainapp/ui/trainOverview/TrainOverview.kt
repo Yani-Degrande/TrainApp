@@ -17,14 +17,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.trainapp.data.TrainComponentType
+import com.example.trainapp.ui.components.ErrorMessage
 import com.example.trainapp.ui.trainOverview.components.TrainComponentList
 
 @Composable
-fun TrainOverview(innerPadding: PaddingValues) {
-    val viewModel : TrainViewModel = viewModel()
+fun TrainOverview(innerPadding: PaddingValues, viewModel : TrainViewModel = viewModel(factory = TrainViewModel.Factory), onTrainComponentClick: (Int) -> Unit) {
     val trainUiState by viewModel.trainUiState.collectAsState()
 
-    Box(modifier = Modifier.padding(innerPadding)) {
+    Box(modifier = Modifier.padding(innerPadding).fillMaxSize(), contentAlignment = Alignment.Center) {
         LazyColumn(
             contentPadding = PaddingValues(8.dp),
         ) {
@@ -32,7 +32,8 @@ fun TrainOverview(innerPadding: PaddingValues) {
             when (trainApiState) {
                 is TrainApiState.Error -> {
                     item {
-                        Text("Error!")
+                        ErrorMessage(errorMessage = "Oops, er is iets misgegaan! Probeer het opnieuw."
+                            , onRetry = { viewModel.retry() })
                     }
                 }
                 is TrainApiState.Loading -> {
@@ -49,11 +50,11 @@ fun TrainOverview(innerPadding: PaddingValues) {
                     val trainsets = trainApiState.trains.filter { it.type == TrainComponentType.TRAINSET }
 
                     item {
-                        TrainComponentList(locomotives, "Locomotieven")
+                        TrainComponentList(locomotives, "Locomotieven", onTrainComponentClick)
                         Spacer(modifier = Modifier.height(16.dp))
-                        TrainComponentList(carriages, "Rijtuigen")
+                        TrainComponentList(carriages, "Rijtuigen", onTrainComponentClick)
                         Spacer(modifier = Modifier.height(16.dp))
-                        TrainComponentList(trainsets, "Treinstellen")
+                        TrainComponentList(trainsets, "Treinstellen", onTrainComponentClick)
                     }
                 }
             }

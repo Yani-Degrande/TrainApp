@@ -6,7 +6,11 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -20,7 +24,7 @@ import com.example.trainapp.R
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 fun TopAppBar(
-    modifier: Modifier = Modifier,@StringRes title: Int,
+    modifier: Modifier = Modifier,@StringRes title: Int,showBackButton: Boolean = false, onBackButtonPressed: ()-> Unit,
 ) {
     val trainIcon = painterResource(R.drawable.logo)
     androidx.compose.material3.TopAppBar(
@@ -42,6 +46,16 @@ fun TopAppBar(
                     style = MaterialTheme.typography.titleMedium, // Use a predefined typography style
                     color = MaterialTheme.colorScheme.onSurface // Use a color that contrasts well with the app bar background
                 )
+            }
+        },
+        navigationIcon = {
+            if (showBackButton) {
+                IconButton(onClick = { onBackButtonPressed() }) {
+                    Icon(
+                        imageVector = Icons.Filled.ArrowBack,
+                        contentDescription = "back"
+                    )
+                }
             }
         },
     )
