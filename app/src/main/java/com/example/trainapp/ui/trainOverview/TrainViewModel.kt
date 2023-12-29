@@ -10,11 +10,14 @@ import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.trainapp.TrainApplication
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import com.example.trainapp.data.TrainComponent
 import com.example.trainapp.data.TrainRepository
-import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import java.io.IOException
 import java.net.SocketTimeoutException
@@ -22,34 +25,37 @@ import java.net.SocketTimeoutException
 class TrainViewModel(
     private val trainRepository: TrainRepository
 ) : ViewModel() {
-    private val _trainUiState = MutableStateFlow(TrainUiState(trains = TrainComponent.getAll()))
-    val trainUiState = _trainUiState.asStateFlow()
+    private val _uiState = MutableStateFlow(TrainOverviewState())
+    val uiState: StateFlow<TrainOverviewState> = _uiState.asStateFlow()
+
+    lateinit var uiListState: StateFlow<TrainComponentListState>
 
     var trainApiState: TrainApiState by mutableStateOf(TrainApiState.Loading)
         private set
     init {
-        getApiTrainComponents()
+        getRepoTrainComponents()
     }
 
-    private fun getApiTrainComponents() {
-        viewModelScope.launch {
-            try {
-                val result = trainRepository.getTrainComponents()
-                _trainUiState.update {
-                    it.copy(trains = result)
-                }
-                trainApiState = TrainApiState.Success(result)
-            } catch (e: SocketTimeoutException) {
-                trainApiState = TrainApiState.Error
-            } catch (e: IOException) {
-                trainApiState = TrainApiState.Error
-            }
+    private fun getRepoTrainComponents() {
+        try {
+            viewModelScope.launch { trainRepository.refreshTrainComponents() }
+            uiListState = trainRepository.getAllItems().map { TrainComponentListState(it) }
+                .stateIn(
+                    scope = viewModelScope,
+                    started = SharingStarted.WhileSubscribed(5_000L),
+                    initialValue = TrainComponentListState()
+                )
+            trainApiState = TrainApiState.Success
+        } catch (e: SocketTimeoutException) {
+            trainApiState = TrainApiState.Error
+        } catch (e: IOException) {
+            trainApiState = TrainApiState.Error
         }
     }
 
     fun retry() {
         trainApiState = TrainApiState.Loading
-        getApiTrainComponents()
+        getRepoTrainComponents()
     }
 
     companion object {

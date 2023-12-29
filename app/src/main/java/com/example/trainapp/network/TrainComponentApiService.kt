@@ -1,6 +1,7 @@
 package com.example.trainapp.network
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
+import kotlinx.coroutines.flow.flow
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import retrofit2.Retrofit
@@ -15,3 +16,7 @@ interface TrainComponentApiService {
     suspend fun getTrainComponentById(@Path("id") id: Int): ApiTrainComponent
 }
 
+
+fun TrainComponentApiService.getTrainComponentsAsFlow() = flow {
+    emit (getTrainComponents())
+}

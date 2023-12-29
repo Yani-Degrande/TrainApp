@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -22,13 +21,19 @@ import com.example.trainapp.ui.trainOverview.components.TrainComponentList
 
 @Composable
 fun TrainOverview(innerPadding: PaddingValues, viewModel : TrainViewModel = viewModel(factory = TrainViewModel.Factory), onTrainComponentClick: (Int) -> Unit) {
-    val trainUiState by viewModel.trainUiState.collectAsState()
+    val trainUiState by viewModel.uiState.collectAsState()
+    val uiListState by viewModel.uiListState.collectAsState()
 
-    Box(modifier = Modifier.padding(innerPadding).fillMaxSize(), contentAlignment = Alignment.Center) {
+    // Use the Api State
+    val trainApiState = viewModel.trainApiState
+
+    Box(modifier = Modifier
+        .padding(innerPadding)
+        .fillMaxSize(), contentAlignment = Alignment.Center) {
         LazyColumn(
             contentPadding = PaddingValues(8.dp),
         ) {
-            val trainApiState = viewModel.trainApiState
+
             when (trainApiState) {
                 is TrainApiState.Error -> {
                     item {
@@ -45,9 +50,9 @@ fun TrainOverview(innerPadding: PaddingValues, viewModel : TrainViewModel = view
                 }
                 is TrainApiState.Success -> {
 
-                    val locomotives = trainApiState.trains.filter { it.type == TrainComponentType.LOCOMOTIVE }
-                    val carriages = trainApiState.trains.filter { it.type == TrainComponentType.CARRIAGE }
-                    val trainsets = trainApiState.trains.filter { it.type == TrainComponentType.TRAINSET }
+                    val locomotives = uiListState.trainComponentList.filter { it.type == TrainComponentType.LOCOMOTIVE }
+                    val carriages = uiListState.trainComponentList.filter { it.type == TrainComponentType.CARRIAGE }
+                    val trainsets = uiListState.trainComponentList.filter { it.type == TrainComponentType.TRAINSET }
 
                     item {
                         TrainComponentList(locomotives, "Locomotieven", onTrainComponentClick)
