@@ -32,6 +32,8 @@ class TrainViewModel(
 
     var trainApiState: TrainApiState by mutableStateOf(TrainApiState.Loading)
         private set
+
+    lateinit var wifiWorkerState: StateFlow<WorkerState>
     init {
         getRepoTrainComponents()
     }
@@ -46,6 +48,13 @@ class TrainViewModel(
                     initialValue = TrainComponentListState()
                 )
             trainApiState = TrainApiState.Success
+            wifiWorkerState = trainRepository.wifiWorkInfo.map { WorkerState(it)}.stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.WhileSubscribed(5_000L),
+                initialValue = WorkerState(),
+            )
+
+
         } catch (e: SocketTimeoutException) {
             trainApiState = TrainApiState.Error
         } catch (e: IOException) {

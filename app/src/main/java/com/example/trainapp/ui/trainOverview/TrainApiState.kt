@@ -1,5 +1,6 @@
 package com.example.trainapp.ui.trainOverview
 
+import androidx.work.WorkInfo
 import com.example.trainapp.data.TrainComponent
 
 
@@ -9,6 +10,8 @@ data class TrainOverviewState(
 )
 
 data class TrainComponentListState(val trainComponentList: List<TrainComponent> = listOf())
+data class WorkerState(val workerInfo: WorkInfo? = null)
+
 sealed interface TrainApiState {
     object Error : TrainApiState
     object Loading : TrainApiState
