@@ -1,5 +1,6 @@
 package com.example.trainapp.network
 
+import android.util.Log
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.coroutines.flow.flow
 import kotlinx.serialization.json.Json
@@ -18,5 +19,10 @@ interface TrainComponentApiService {
 
 
 fun TrainComponentApiService.getTrainComponentsAsFlow() = flow {
-    emit (getTrainComponents())
+    try {
+        emit(getTrainComponents())
+    } catch (e: Exception) {
+        Log.e("API", "getTrainComponentsAsFlow: ${e.stackTraceToString()}", e)
+    }
 }
+
