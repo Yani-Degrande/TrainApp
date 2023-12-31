@@ -10,6 +10,7 @@ import com.example.trainapp.data.database.TrainComponentDao
 import com.example.trainapp.data.database.asDbTrainComponent
 import com.example.trainapp.data.database.asDomainTrainComponent
 import com.example.trainapp.data.database.asDomainTrainComponents
+import com.example.trainapp.model.TrainComponent
 import com.example.trainapp.network.TrainComponentApiService
 import com.example.trainapp.network.asDomainObjects
 import com.example.trainapp.network.getTrainComponentsAsFlow

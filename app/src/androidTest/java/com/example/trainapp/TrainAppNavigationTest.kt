@@ -5,6 +5,7 @@ import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.performClick
 import androidx.navigation.compose.ComposeNavigator
 import androidx.navigation.testing.TestNavHostController
+import com.example.trainapp.ui.TrainApp
 import com.example.trainapp.ui.navigation.Destinations
 import org.junit.Before
 import org.junit.Rule

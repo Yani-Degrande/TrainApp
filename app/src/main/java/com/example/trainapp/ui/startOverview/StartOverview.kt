@@ -23,7 +23,7 @@ import com.example.trainapp.R
 @Composable
 fun StartOverview(innerPadding: PaddingValues) {
     Box(modifier = Modifier.padding(innerPadding), contentAlignment = Alignment.TopCenter) {
-        Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
+        Column(modifier = Modifier.verticalScroll(rememberScrollState()), horizontalAlignment = Alignment.CenterHorizontally) {
             Image(
                 painter = painterResource(id = R.drawable.logo),
                 contentDescription = "Logo",

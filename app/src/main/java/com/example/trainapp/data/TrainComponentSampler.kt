@@ -1,15 +1,10 @@
 package com.example.trainapp.data
-import com.example.trainapp.R
-data class TrainComponent(
-    val id: Int,
-    val type: TrainComponentType,
-    val subtype: String,
-    val image: String,
-    val descriptionImage: String,
-    val description: String
-)
-{
-    companion object TrainComponentSampler{
+
+import com.example.trainapp.model.TrainComponent
+import com.example.trainapp.model.TrainComponentType
+
+
+object TrainComponentSampler{
         val sampleTrainComponents = mutableListOf(
             TrainComponent(
                 id = 1,
@@ -114,4 +109,3 @@ data class TrainComponent(
             sampleTrainComponents.find { it.id == id }
         }
     }
-}
