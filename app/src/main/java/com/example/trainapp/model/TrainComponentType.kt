@@ -1,4 +1,4 @@
-package com.example.trainapp.data
+package com.example.trainapp.model
 
 enum class TrainComponentType {
     LOCOMOTIVE,

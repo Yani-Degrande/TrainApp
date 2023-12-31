@@ -1,8 +1,9 @@
 package com.example.trainapp.network
 
-import com.example.trainapp.data.TrainComponent
-import com.example.trainapp.data.TrainComponentType
+import com.example.trainapp.model.TrainComponent
+import com.example.trainapp.model.TrainComponentType
 import kotlinx.serialization.Serializable
+import java.util.concurrent.Flow
 
 @Serializable
 data class ApiTrainComponent(

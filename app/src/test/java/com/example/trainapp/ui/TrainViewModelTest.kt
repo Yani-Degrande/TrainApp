@@ -1,6 +1,6 @@
 package com.example.trainapp.ui
 
-import com.example.trainapp.data.TrainComponent
+import com.example.trainapp.data.TrainComponentSampler
 import com.example.trainapp.ui.trainOverview.TrainViewModel
 import junit.framework.TestCase.assertEquals
 import org.junit.Before
@@ -16,7 +16,7 @@ class TrainViewModelTest {
 
     @Test
     fun testInitialUiState() {
-        val expectedState = TrainUiState(trains = TrainComponent.getAll())
+        val expectedState = TrainUiState(trains = TrainComponentSampler.getAll())
         assertEquals(expectedState, viewModel.trainUiState.value)
     }
 }

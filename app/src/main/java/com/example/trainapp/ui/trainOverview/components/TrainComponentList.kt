@@ -14,7 +14,8 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.trainapp.data.TrainComponent
+import com.example.trainapp.data.TrainComponentSampler
+import com.example.trainapp.model.TrainComponent
 
 
 @Composable

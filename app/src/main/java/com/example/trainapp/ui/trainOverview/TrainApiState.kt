@@ -1,7 +1,8 @@
 package com.example.trainapp.ui.trainOverview
 
 import androidx.work.WorkInfo
-import com.example.trainapp.data.TrainComponent
+import com.example.trainapp.data.TrainComponentSampler
+import com.example.trainapp.model.TrainComponent
 
 
 data class TrainOverviewState(

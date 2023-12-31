@@ -2,8 +2,10 @@ package com.example.trainapp.data.database
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.trainapp.data.TrainComponent
-import com.example.trainapp.data.TrainComponentType
+import com.example.trainapp.data.TrainComponentSampler
+import com.example.trainapp.model.TrainComponent
+import com.example.trainapp.model.TrainComponentType
+
 @Entity(tableName = "trainComponents")
 data class DbTrainComponent (
     @PrimaryKey(autoGenerate = true)

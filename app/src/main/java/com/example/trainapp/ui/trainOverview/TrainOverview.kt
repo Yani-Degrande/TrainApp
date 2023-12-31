@@ -15,10 +15,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.trainapp.data.TrainComponentType
+import com.example.trainapp.model.TrainComponentType
 import com.example.trainapp.ui.components.ErrorMessage
 import com.example.trainapp.ui.trainOverview.components.TrainComponentList
-import androidx.compose.material3.Text
 
 @Composable
 fun TrainOverview(innerPadding: PaddingValues, viewModel : TrainViewModel = viewModel(factory = TrainViewModel.Factory), onTrainComponentClick: (Int) -> Unit) {

@@ -5,35 +5,18 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
+import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.currentBackStackEntryAsState
-import androidx.navigation.compose.rememberNavController
-import com.example.trainapp.ui.navigation.BottomAppBar
-import com.example.trainapp.ui.navigation.Destinations
-import com.example.trainapp.ui.navigation.TopAppBar
-import com.example.trainapp.ui.startOverview.StartOverview
-import com.example.trainapp.ui.teamOverview.TeamOverview
+import com.example.trainapp.ui.TrainApp
 import com.example.trainapp.ui.theme.TrainAppTheme
-import com.example.trainapp.ui.trainOverview.TrainOverview
-import com.example.trainapp.ui.trainOverview.detail.TrainDetailsOverview
+import com.example.trainapp.ui.util.TaskNavigationType
 
 class MainActivity : ComponentActivity() {
+    @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -43,71 +26,22 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    TrainApp()
+                    val windowSize = calculateWindowSizeClass(activity = this)
+                    when (windowSize.widthSizeClass) {
+                        WindowWidthSizeClass.Compact -> {
+                            TrainApp(TaskNavigationType.BOTTOM_NAVIGATION)
+                        }
+                        WindowWidthSizeClass.Medium -> {
+                            TrainApp(TaskNavigationType.NAVIGATION_RAIL)
+                        }
+                        WindowWidthSizeClass.Expanded -> {
+                            TrainApp(TaskNavigationType.PERMANENT_NAVIGATION_DRAWER)
+                        }
+                        else -> {
+                            TrainApp(TaskNavigationType.BOTTOM_NAVIGATION)
+                        }
+                    }
                 }
-            }
-        }
-    }
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun TrainApp(navController: NavHostController = rememberNavController()){
-    var selectedItem by remember { mutableStateOf(0) }
-    val trainIcon = painterResource(R.drawable.train_fill0_wght400_grad0_opsz24)
-    val groupIcon = painterResource(R.drawable.group_fill0_wght400_grad0_opsz24)
-    val homeIcon = painterResource(R.drawable.cottage_fill0_wght400_grad0_opsz24)
-
-    val icons = listOf(homeIcon,trainIcon, groupIcon)
-    val items = listOf("Home", "Treinen", "Ploegen")
-
-    val currentRoute = navController.currentBackStackEntryAsState().value?.destination?.route
-    val isDetailPage = currentRoute?.startsWith("${Destinations.Train.name}/") == true
-
-    Scaffold(
-        containerColor = Color.Transparent,
-        topBar = {
-            TopAppBar(
-                modifier = Modifier.padding(8.dp),
-                when (selectedItem) {
-                    0 -> R.string.train_app_title
-                    1 -> R.string.trains
-                    2 -> R.string.groups
-                    else -> R.string.train_app_title
-                },
-                showBackButton = isDetailPage,
-                onBackButtonPressed = { navController.popBackStack() }
-            )
-        },
-        bottomBar = {
-            BottomAppBar(
-                items = items,
-                icons = icons,
-                selectedItem = selectedItem,
-                onItemSelected = { index ->
-                    selectedItem = index
-                    navController.navigate(Destinations.values()[index].name)
-                }
-            )
-        }
-    ) { innerPadding ->
-        NavHost(navController = navController, startDestination = Destinations.Start.name) {
-            composable(route= Destinations.Start.name) {
-                StartOverview(innerPadding)
-
-            }
-            composable(route = Destinations.Train.name) {
-                TrainOverview(innerPadding = innerPadding, onTrainComponentClick = { trainId ->
-                    navController.navigate("${Destinations.Train.name}/$trainId")
-                })
-            }
-            composable(route = "${Destinations.Train.name}/{trainId}") { backStackEntry ->
-                val trainId = backStackEntry.arguments?.getString("trainId")?.toInt() ?: 0
-                TrainDetailsOverview(innerPadding, trainId)
-            }
-
-            composable(route = Destinations.Teams.name) {
-                TeamOverview(innerPadding)
             }
         }
     }
