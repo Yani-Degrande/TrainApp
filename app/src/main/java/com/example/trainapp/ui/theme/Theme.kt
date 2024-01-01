@@ -6,7 +6,11 @@ import androidx.compose.material3.lightColorScheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.runtime.Composable
 
-
+/**
+ * Defines the light color scheme for the Train Application.
+ * This color scheme is used when the application is set to light mode.
+ * It specifies colors for various UI components like primary, secondary, background, surface, etc.
+ */
 private val LightColors = lightColorScheme(
     primary = md_theme_light_primary,
     onPrimary = md_theme_light_onPrimary,
@@ -39,7 +43,11 @@ private val LightColors = lightColorScheme(
     scrim = md_theme_light_scrim,
 )
 
-
+/**
+ * Defines the dark color scheme for the Train Application.
+ * This color scheme is used when the application is set to dark mode.
+ * It specifies colors for various UI components tailored for a dark theme, like primary, secondary, background, surface, etc.
+ */
 private val DarkColors = darkColorScheme(
     primary = md_theme_dark_primary,
     onPrimary = md_theme_dark_onPrimary,
@@ -71,7 +79,13 @@ private val DarkColors = darkColorScheme(
     outlineVariant = md_theme_dark_outlineVariant,
     scrim = md_theme_dark_scrim,
 )
-
+/**
+ * A composable function that applies the Train Application theme to its content.
+ * It switches between light and dark color schemes based on the `useDarkTheme` parameter or system settings.
+ *
+ * @param useDarkTheme A boolean value indicating whether to use the dark theme. Defaults to system settings.
+ * @param content The content composable to which this theme will be applied.
+ */
 @Composable
 fun TrainAppTheme(
     useDarkTheme: Boolean = isSystemInDarkTheme(),

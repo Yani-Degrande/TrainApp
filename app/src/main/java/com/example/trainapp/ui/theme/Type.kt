@@ -6,15 +6,27 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 
-// Set of Material typography styles to start with
-val Typography = Typography(
-    bodyLarge = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Normal,
-        fontSize = 16.sp,
-        lineHeight = 24.sp,
-        letterSpacing = 0.5.sp
-    )
+/**
+ * Defines the set of typography styles for the Train Application.
+ * This typography set includes various text styles used throughout the application,
+ * ensuring consistency in text appearance.
+ *
+ * This example only overrides the `bodyLarge` text style, but other text styles can be defined similarly.
+ *
+ * @property bodyLarge The default text style for larger body text.
+ *                     Configures font family, weight, size, line height, and letter spacing.
+ * Other text styles like `titleLarge` and `labelSmall` can also be overridden similarly.
+ */
+val Typography =
+    Typography(
+        bodyLarge =
+            TextStyle(
+                fontFamily = FontFamily.Default,
+                fontWeight = FontWeight.Normal,
+                fontSize = 16.sp,
+                lineHeight = 24.sp,
+                letterSpacing = 0.5.sp,
+            ),
     /* Other default text styles to override
     titleLarge = TextStyle(
         fontFamily = FontFamily.Default,
@@ -30,5 +42,5 @@ val Typography = Typography(
         lineHeight = 16.sp,
         letterSpacing = 0.5.sp
     )
-    */
-)
+     */
+    )

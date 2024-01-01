@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationDrawerItem
 import androidx.compose.material3.NavigationDrawerItemDefaults
 import androidx.compose.material3.Text
@@ -17,6 +16,17 @@ import com.example.trainapp.R
 import com.example.trainapp.ui.navigation.Destinations
 import com.example.trainapp.ui.navigation.pair
 
+/**
+ * A composable function that creates the content for a navigation drawer.
+ * It displays a list of navigation items, each with an icon and a label.
+ *
+ * This function uses the `ExperimentalMaterial3Api` class, indicating that it relies on an API
+ * that is experimental and may change in the future.
+ *
+ * @param selectedDestination The currently selected navigation destination.
+ * @param onTabPressed A lambda function that is invoked with the name of the navigation item when it is pressed.
+ * @param modifier A [Modifier] applied to the Column layout.
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NavigationDrawerContent(
@@ -49,9 +59,10 @@ fun NavigationDrawerContent(
                         contentDescription = label,
                     )
                 },
-                colors = NavigationDrawerItemDefaults.colors(
-                    unselectedContainerColor = Color.Transparent,
-                ),
+                colors =
+                    NavigationDrawerItemDefaults.colors(
+                        unselectedContainerColor = Color.Transparent,
+                    ),
                 onClick = { onTabPressed(navItem.name) },
             )
         }

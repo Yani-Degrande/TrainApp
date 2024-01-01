@@ -27,7 +27,7 @@ android {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
         }
     }
@@ -77,21 +77,19 @@ dependencies {
     implementation("io.coil-kt:coil-compose:2.5.0")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
 
-    //room
-    val room_version = "2.5.0"
-    implementation("androidx.room:room-runtime:$room_version")
+    // room
+    val roomVersion = "2.5.0"
+    implementation("androidx.room:room-runtime:$roomVersion")
     // optional - Kotlin Extensions and Coroutines support for Room
-    implementation("androidx.room:room-ktx:$room_version")
+    implementation("androidx.room:room-ktx:$roomVersion")
     // To use Kotlin Symbol Processing (KSP)
-    ksp("androidx.room:room-compiler:$room_version")
+    ksp("androidx.room:room-compiler:$roomVersion")
     // optional - Test helpers
-    testImplementation("androidx.room:room-testing:$room_version")
-    annotationProcessor("androidx.room:room-compiler:$room_version")
+    testImplementation("androidx.room:room-testing:$roomVersion")
+    annotationProcessor("androidx.room:room-compiler:$roomVersion")
 
-    //workers
+    // workers
     implementation("androidx.work:work-runtime-ktx:2.9.0")
-
-
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

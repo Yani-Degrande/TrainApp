@@ -21,6 +21,18 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.trainapp.R
 
+/**
+ * A custom composable function that creates a top app bar with a logo and title.
+ * The app bar can optionally include a back button.
+ *
+ * This function uses the ExperimentalMaterial3Api class, indicating that it relies on an API
+ * that is experimental and may change in the future.
+ *
+ * @param modifier A [Modifier] applied to the app bar, used to adjust its styling or layout.
+ * @param title The resource ID of the title string to be displayed in the app bar.
+ * @param showBackButton A boolean value indicating whether to show a back button on the app bar.
+ * @param onBackButtonPressed A lambda function that is executed when the back button is pressed.
+ */
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 fun TopAppBar(

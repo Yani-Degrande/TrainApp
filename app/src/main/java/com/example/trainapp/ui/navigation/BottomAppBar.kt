@@ -17,7 +17,7 @@ fun BottomAppBar(
     items: List<String>,
     icons: List<Painter>,
     selectedItem: Int,
-    onItemSelected: (Int) -> Unit
+    onItemSelected: (Int) -> Unit,
 ) {
     NavigationBar(
         modifier = Modifier,
@@ -30,16 +30,17 @@ fun BottomAppBar(
                     Icon(
                         painter = icons[index],
                         contentDescription = item,
-                        modifier = Modifier.size(24.dp) // Set the size of the Icon
+                        modifier = Modifier.size(24.dp),
                     )
                 },
                 selected = selectedItem == index,
                 onClick = { onItemSelected(index) },
-                colors = NavigationBarItemDefaults.colors(
-                    selectedIconColor = Color.Black,
-                    selectedTextColor = Color.Black,
-                    indicatorColor = MaterialTheme.colorScheme.surfaceVariant
-                ),
+                colors =
+                    NavigationBarItemDefaults.colors(
+                        selectedIconColor = Color.Black,
+                        selectedTextColor = Color.Black,
+                        indicatorColor = MaterialTheme.colorScheme.surfaceVariant,
+                    ),
             )
         }
     }

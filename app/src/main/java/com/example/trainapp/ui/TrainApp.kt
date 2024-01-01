@@ -19,9 +19,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
@@ -37,12 +35,23 @@ import com.example.trainapp.ui.navigation.TopAppBar
 import com.example.trainapp.ui.navigation.pair
 import com.example.trainapp.ui.util.TaskNavigationType
 
+/**
+ * The main composable function for the Train Application.
+ * It sets up the UI structure based on the specified navigation type (e.g., bottom navigation, navigation rail, permanent drawer).
+ * This function dynamically changes the navigation and layout according to the provided [navigationType].
+ *
+ * This function uses the ExperimentalMaterial3Api class, indicating that it relies on an API
+ * that is experimental and may change in the future.
+ *
+ * @param navigationType The type of navigation to be used in the app (e.g., bottom navigation, navigation rail).
+ * @param navController The navigation controller for navigating between screens.
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TrainApp(
     navigationType: TaskNavigationType,
-    navController: NavHostController = rememberNavController()
-){
+    navController: NavHostController = rememberNavController(),
+)  {
     var selectedItem by remember { mutableStateOf(0) }
     val (icons, items) = pair()
 
@@ -55,11 +64,12 @@ fun TrainApp(
                 NavigationDrawerContent(
                     selectedDestination = navController.currentDestination,
                     onTabPressed = { node: String -> navController.navigate(node) },
-                    modifier = Modifier
-                        .wrapContentWidth()
-                        .fillMaxHeight()
-                        .background(MaterialTheme.colorScheme.inverseOnSurface)
-                        .padding(dimensionResource(R.dimen.drawer_padding_content)),
+                    modifier =
+                        Modifier
+                            .wrapContentWidth()
+                            .fillMaxHeight()
+                            .background(MaterialTheme.colorScheme.inverseOnSurface)
+                            .padding(dimensionResource(R.dimen.drawer_padding_content)),
                 )
             }
         }) {
@@ -75,7 +85,7 @@ fun TrainApp(
                             else -> R.string.train_app_title
                         },
                         showBackButton = isDetailPage,
-                        onBackButtonPressed = { navController.popBackStack() }
+                        onBackButtonPressed = { navController.popBackStack() },
                     )
                 },
             ) { innerPadding ->
@@ -95,7 +105,7 @@ fun TrainApp(
                         else -> R.string.train_app_title
                     },
                     showBackButton = isDetailPage,
-                    onBackButtonPressed = { navController.popBackStack() }
+                    onBackButtonPressed = { navController.popBackStack() },
                 )
             },
             bottomBar = {
@@ -106,9 +116,9 @@ fun TrainApp(
                     onItemSelected = { index ->
                         selectedItem = index
                         navController.navigate(Destinations.values()[index].name)
-                    }
+                    },
                 )
-            }
+            },
         ) { innerPadding ->
             NavComponent(navController, innerPadding)
         }
@@ -133,7 +143,7 @@ fun TrainApp(
                             else -> R.string.train_app_title
                         },
                         showBackButton = isDetailPage,
-                        onBackButtonPressed = { navController.popBackStack() }
+                        onBackButtonPressed = { navController.popBackStack() },
                     )
                 },
             ) { innerPadding ->

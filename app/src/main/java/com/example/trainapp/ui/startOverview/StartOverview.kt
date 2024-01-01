@@ -20,6 +20,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.trainapp.R
 
+/**
+ * A composable function that displays the start overview screen.
+ * This screen serves as a welcoming view for the application, featuring a logo and introductory text.
+ *
+ * @param innerPadding The padding to apply to the content. This is useful for adjusting the layout based on navigation components or other UI elements that may affect the overall padding.
+ */
 @Composable
 fun StartOverview(innerPadding: PaddingValues) {
     Box(modifier = Modifier.padding(innerPadding), contentAlignment = Alignment.TopCenter) {

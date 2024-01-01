@@ -10,6 +10,14 @@ import com.example.trainapp.ui.teamOverview.TeamOverview
 import com.example.trainapp.ui.trainOverview.TrainOverview
 import com.example.trainapp.ui.trainOverview.detail.TrainDetailsOverview
 
+/**
+ * A composable function that sets up the navigation for the application.
+ * It defines the navigation routes and associates them with their respective composable screens.
+ * Navigation is handled using a [NavHostController].
+ *
+ * @param navController The [NavHostController] that controls the navigation between composables.
+ * @param innerPadding The padding to apply to the composables inside the navigation. This is useful for adjusting layout based on navigation components or other UI elements.
+ */
 @Composable
 fun NavComponent(
     navController: NavHostController,

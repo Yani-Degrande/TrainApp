@@ -14,40 +14,49 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.trainapp.data.TrainComponentSampler
 import com.example.trainapp.model.TrainComponent
 
-
+/**
+ * A composable function that displays a list of train components.
+ * It shows train components in a horizontally scrolling row, each represented by a card.
+ *
+ * @param trainComponents The list of [TrainComponent]s to be displayed.
+ * @param trainComponentType A string representing the type of train components being displayed (e.g., "Locomotives").
+ * @param onTrainComponentClick A lambda function that is called when a train component card is clicked. It passes the ID of the clicked component.
+ */
 @Composable
-fun TrainComponentList(trainComponents : List<TrainComponent>, trainComponentType: String, onTrainComponentClick: (Int) -> Unit) {
-
+fun TrainComponentList(
+    trainComponents: List<TrainComponent>,
+    trainComponentType: String,
+    onTrainComponentClick: (Int) -> Unit,
+) {
     Box {
-        Column() {
+        Column {
             Text(
                 text = trainComponentType,
                 fontWeight = FontWeight.Bold,
                 color = Color.Black,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(start = 16.dp),
-                style = TextStyle(
-                    fontFamily = FontFamily.Default,
-                    fontSize = 14.sp,
-                    lineHeight = 12.sp
-                )
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(start = 16.dp),
+                style =
+                    TextStyle(
+                        fontFamily = FontFamily.Default,
+                        fontSize = 14.sp,
+                        lineHeight = 12.sp,
+                    ),
             )
-            LazyRow(
-            ) {
+            LazyRow {
                 items(trainComponents.size) {
                     TrainCard(
                         trainId = trainComponents[it].id,
                         type = trainComponents[it].subtype,
                         image = trainComponents[it].image,
-                        onClick = onTrainComponentClick
+                        onClick = onTrainComponentClick,
                     )
                 }
             }
         }
     }
 }
-

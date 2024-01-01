@@ -23,6 +23,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.trainapp.R
 
+/**
+ * A composable function that displays the team overview screen.
+ * This screen currently shows a placeholder message and image indicating that the content is not yet available.
+ *
+ * @param innerPadding The padding to apply to the content. Useful for adjusting layout based on navigation components.
+ */
 @Composable
 fun TeamOverview(innerPadding: PaddingValues) {
     Box(

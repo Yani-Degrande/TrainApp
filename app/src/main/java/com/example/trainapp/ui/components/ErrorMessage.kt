@@ -2,11 +2,8 @@ package com.example.trainapp.ui.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -27,24 +24,33 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.trainapp.R
 
+/**
+ * A composable function that displays an error message with a retry option.
+ * This UI component consists of an image representing an error, the error message, and a retry button.
+ *
+ * @param errorMessage The error message to display.
+ * @param onRetry The lambda function to invoke when the retry button is clicked.
+ */
 
 @Composable
 fun ErrorMessage(
     errorMessage: String,
-    onRetry: () -> Unit
+    onRetry: () -> Unit,
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
-        modifier = Modifier
-            .padding(16.dp) // Add padding around the Column
-            .wrapContentSize() // Wrap content instead of filling max size
+        modifier =
+            Modifier
+                .padding(16.dp) // Add padding around the Column
+                .wrapContentSize(), // Wrap content instead of filling max size
     ) {
         Image(
             painter = painterResource(id = R.drawable.train_cartoon),
             contentDescription = "Error",
-            modifier = Modifier
-                .size(250.dp) // Example fixed size, adjust as needed
+            modifier =
+                Modifier
+                    .size(250.dp), // Example fixed size, adjust as needed
         )
         Spacer(modifier = Modifier.height(16.dp))
         Text(
@@ -52,25 +58,25 @@ fun ErrorMessage(
             fontSize = 28.sp,
             fontWeight = FontWeight.Bold,
             textAlign = TextAlign.Center,
-            color = Color.Black
+            color = Color.Black,
         )
         Text(
             text = errorMessage,
             fontSize = 16.sp,
             textAlign = TextAlign.Center,
-            color = Color.Black
+            color = Color.Black,
         )
         Spacer(modifier = Modifier.height(16.dp))
         Button(
             onClick = onRetry,
             modifier = Modifier.wrapContentWidth(), // Wrap content width instead of filling max size
-            colors = ButtonDefaults.buttonColors(
-                containerColor = MaterialTheme.colorScheme.surfaceVariant,
-                contentColor = Color.Black
-            ),
+            colors =
+                ButtonDefaults.buttonColors(
+                    containerColor = MaterialTheme.colorScheme.surfaceVariant,
+                    contentColor = Color.Black,
+                ),
         ) {
             Text(text = "Probeer opnieuw")
         }
     }
 }
-
