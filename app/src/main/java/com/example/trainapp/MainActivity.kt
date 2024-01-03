@@ -12,7 +12,7 @@ import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.ui.Modifier
 import com.example.trainapp.ui.TrainApp
 import com.example.trainapp.ui.theme.TrainAppTheme
-import com.example.trainapp.ui.util.TaskNavigationType
+import com.example.trainapp.ui.util.TrainNavigationType
 
 /**
  * The main activity of the Train Application.
@@ -42,16 +42,16 @@ class MainActivity : ComponentActivity() {
                     val windowSize = calculateWindowSizeClass(activity = this)
                     when (windowSize.widthSizeClass) {
                         WindowWidthSizeClass.Compact -> {
-                            TrainApp(TaskNavigationType.BOTTOM_NAVIGATION)
+                            TrainApp(TrainNavigationType.BOTTOM_NAVIGATION)
                         }
                         WindowWidthSizeClass.Medium -> {
-                            TrainApp(TaskNavigationType.NAVIGATION_RAIL)
+                            TrainApp(TrainNavigationType.NAVIGATION_RAIL)
                         }
                         WindowWidthSizeClass.Expanded -> {
-                            TrainApp(TaskNavigationType.PERMANENT_NAVIGATION_DRAWER)
+                            TrainApp(TrainNavigationType.PERMANENT_NAVIGATION_DRAWER)
                         }
                         else -> {
-                            TrainApp(TaskNavigationType.BOTTOM_NAVIGATION)
+                            TrainApp(TrainNavigationType.BOTTOM_NAVIGATION)
                         }
                     }
                 }
