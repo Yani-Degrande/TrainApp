@@ -3,6 +3,7 @@ package com.example.trainapp.network
 import com.example.trainapp.model.TrainComponentType
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertNotNull
+import junit.framework.TestCase.assertTrue
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.runBlocking
 import okhttp3.mockwebserver.MockResponse
@@ -70,5 +71,17 @@ class TrainComponentApiServiceTest {
 
             assertEquals(1, resultList.size)
             assertEquals(TrainComponentType.LOCOMOTIVE, resultList[0][0].type)
+        }
+
+    @Test
+    fun `getTrainComponents handles empty list response`() =
+        runBlocking {
+            val emptyListApiResponse = "[]"
+            mockWebServer.enqueue(MockResponse().setBody(emptyListApiResponse))
+
+            val response = service.getTrainComponents()
+
+            assertNotNull(response)
+            assertTrue(response.isEmpty())
         }
 }
