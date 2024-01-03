@@ -14,7 +14,7 @@ To install Train App, follow these steps:
 
 1. Clone the repository:
    ```sh
-   git clone [https://github.com/yourusername/trainapp.git](https://github.com/Yani-Degrande/TrainApp.git)https://github.com/Yani-Degrande/TrainApp.git)
+   git clone https://github.com/Yani-Degrande/TrainApp.git)https://github.com/Yani-Degrande/TrainApp.git
     ```
 2. Open the project in Android Studio or your preferred IDE.
 3. Build the project and run it on an emulator or physical device.
