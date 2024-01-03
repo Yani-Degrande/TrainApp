@@ -8,7 +8,7 @@ package com.example.trainapp.ui.util
  * - NAVIGATION_RAIL: Represents a navigation style with a vertical list of items on the side of the content area, suitable for tablet or desktop layouts.
  * - PERMANENT_NAVIGATION_DRAWER: Represents a permanently visible drawer for navigation, commonly used in larger screen layouts like desktops.
  */
-enum class TaskNavigationType {
+enum class TrainNavigationType {
     BOTTOM_NAVIGATION,
     NAVIGATION_RAIL,
     PERMANENT_NAVIGATION_DRAWER,

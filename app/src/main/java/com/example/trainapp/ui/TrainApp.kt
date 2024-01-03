@@ -33,7 +33,7 @@ import com.example.trainapp.ui.navigation.Destinations
 import com.example.trainapp.ui.navigation.NavComponent
 import com.example.trainapp.ui.navigation.TopAppBar
 import com.example.trainapp.ui.navigation.pair
-import com.example.trainapp.ui.util.TaskNavigationType
+import com.example.trainapp.ui.util.TrainNavigationType
 
 /**
  * The main composable function for the Train Application.
@@ -49,16 +49,16 @@ import com.example.trainapp.ui.util.TaskNavigationType
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TrainApp(
-    navigationType: TaskNavigationType,
+    navigationType: TrainNavigationType,
     navController: NavHostController = rememberNavController(),
-)  {
+) {
     var selectedItem by remember { mutableStateOf(0) }
     val (icons, items) = pair()
 
     val currentRoute = navController.currentBackStackEntryAsState().value?.destination?.route
     val isDetailPage = currentRoute?.startsWith("${Destinations.Train.name}/") == true
 
-    if (navigationType == TaskNavigationType.PERMANENT_NAVIGATION_DRAWER) {
+    if (navigationType == TrainNavigationType.PERMANENT_NAVIGATION_DRAWER) {
         PermanentNavigationDrawer(drawerContent = {
             PermanentDrawerSheet(Modifier.width(dimensionResource(R.dimen.drawer_width))) {
                 NavigationDrawerContent(
@@ -92,7 +92,7 @@ fun TrainApp(
                 NavComponent(navController, innerPadding)
             }
         }
-    } else if (navigationType == TaskNavigationType.BOTTOM_NAVIGATION) {
+    } else if (navigationType == TrainNavigationType.BOTTOM_NAVIGATION) {
         Scaffold(
             containerColor = Color.Transparent,
             topBar = {
@@ -124,7 +124,7 @@ fun TrainApp(
         }
     } else {
         Row {
-            AnimatedVisibility(visible = navigationType == TaskNavigationType.NAVIGATION_RAIL) {
+            AnimatedVisibility(visible = navigationType == TrainNavigationType.NAVIGATION_RAIL) {
                 val navigationRailContentDescription = stringResource(R.string.navigation_rail)
                 TrainNavigationRail(
                     selectedDestination = navController.currentDestination,
